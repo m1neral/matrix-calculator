@@ -72,5 +72,4 @@ export default class Matrix {
 
         return c;
     }
-
 }

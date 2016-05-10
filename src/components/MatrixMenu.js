@@ -6,10 +6,12 @@ export default class MatrixMenu extends Component {
         super(props);
     }
 
+
     render() {
         return (
             <Col className="matrix-menu" xs={3} md={3}>
-                <Button bsStyle="success" onClick={alert} block>Умножить матрицы</Button>
+                <Button bsStyle="success" disabled={!(this.props.a.canMultiply(this.props.b))}
+                        onClick={this.props.onMultiply} block>Умножить матрицы</Button>
                 <Button bsSize="small" block><Glyphicon glyph="remove" /> Очистить матрицы</Button>
                 <Button bsSize="small" block><Glyphicon glyph="sort" /> Поменять матрицы местами</Button>
                 <FormGroup>
@@ -20,3 +22,11 @@ export default class MatrixMenu extends Component {
         );
     }
 }
+
+MatrixMenu.propTypes = {
+    a: React.PropTypes.shape({
+        canMultiply: React.PropTypes.func
+    }),
+    b: React.PropTypes.shape({ store: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.number)) }),
+    onMultiply: React.PropTypes.func
+};

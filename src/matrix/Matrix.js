@@ -29,6 +29,10 @@ export default class Matrix {
         this.store[i][j] = value;
     }
 
+    getPureMatrix() {
+        return this.store;
+    }
+
     addRow() {
         const [rowsCount, colsCount] = this.getSize();
         this.store[rowsCount] = [];
@@ -54,6 +58,10 @@ export default class Matrix {
         }
     }
 
+    canMultiply(b) {
+        return this.getColsCount() == b.getRowsCount();
+    }
+
     multiply(b) {
         const [aRowsCount, aColsCount] = this.getSize();
         const [bRowsCount, bColsCount] = b.getSize();
@@ -66,7 +74,7 @@ export default class Matrix {
             for (let i = 0; i < aRowsCount; i++) {
                 let t = 0;
                 for (var j = 0; j < bRowsCount; j++) t += this.getCellValue(i, j) * b.getCellValue(j, k);
-                c.setCellValue(t, i, k);
+                c.setCellValue(isNaN(t) ? undefined : t, i, k);
             }
         }
 

@@ -6,15 +6,30 @@ export default class MatrixView extends Component {
         super(props);
     }
 
+    createMatrixTable() {
+        return this.props.matrix.getPureMatrix().map((row,i) =>
+            <tr key={i}>{row.map((el,j) => <td key={j}>
+                <MatrixCell i={i} j={j} matrix={this.props.matrix} onChange={(value) => this.props.onChange(value, i, j)}
+                            value={this.props.matrix.getCellValue(i, j)} readOnly={this.props.readOnly}/></td>)}
+            </tr>);
+    }
+
     render() {
         return (
-            <MatrixCell index="1" />
+            <table className="matrix-view-table">
+                <tbody>
+                    {this.createMatrixTable()}
+                </tbody>
+            </table>
         );
     }
 }
 
 MatrixView.propTypes = {
-  matrix:  React.PropTypes.shape({
-      store: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.number))
-  })
+    matrix:  React.PropTypes.shape({
+        getPureMatrix: React.PropTypes.func,
+        getCellValue: React.PropTypes.func
+    }),
+    readOnly: React.PropTypes.bool,
+    onChange: React.PropTypes.func
 };

@@ -12,8 +12,8 @@ export default class MatrixMenu extends Component {
             <Col className="matrix-menu" xs={3} md={3}>
                 <Button bsStyle="success" disabled={!(this.props.a.canMultiply(this.props.b))}
                         onClick={this.props.onMultiply} block>Умножить матрицы</Button>
-                <Button bsSize="small" block><Glyphicon glyph="remove" /> Очистить матрицы</Button>
-                <Button bsSize="small" block><Glyphicon glyph="sort" /> Поменять матрицы местами</Button>
+                <Button bsSize="small" onClick={this.props.onClear} block><Glyphicon glyph="remove" /> Очистить матрицы</Button>
+                <Button bsSize="small" onClick={this.props.onSwap} block><Glyphicon glyph="sort" /> Поменять матрицы местами</Button>
                 <FormGroup>
                     <Radio inline name="optradio">Матрица A</Radio>
                     <Radio inline name="optradio">Матрица B</Radio>
@@ -28,5 +28,7 @@ MatrixMenu.propTypes = {
         canMultiply: React.PropTypes.func
     }),
     b: React.PropTypes.shape({ store: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.number)) }),
-    onMultiply: React.PropTypes.func
+    onMultiply: React.PropTypes.func,
+    onClear: React.PropTypes.func,
+    onSwap: React.PropTypes.func
 };

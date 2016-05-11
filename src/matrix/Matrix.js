@@ -58,6 +58,10 @@ export default class Matrix {
         }
     }
 
+    clear() {
+        return new Matrix(this.getRowsCount(), this.getColsCount());
+    }
+
     canMultiply(b) {
         return this.getColsCount() == b.getRowsCount();
     }

@@ -8,10 +8,17 @@ export default class MatrixMenu extends Component {
         super(props);
     }
 
+    setMenuClassName() {
+        // TODO: use https://github.com/JedWatson/classnames
+        let className = "matrix-menu";
+        if (!this.props.c) className += " multiply-error";
+        if (this.props.cellEditing) className += " cell-editing";
+        return className;
+    }
 
     render() {
         return (
-            <Col className="matrix-menu" xs={3} md={3}>
+            <Col className={this.setMenuClassName()} xs={3} md={3}>
                 <Button className="btn-multiply" bsStyle="success" disabled={!(this.props.a.canMultiply(this.props.b))}
                         onClick={this.props.onMultiply} block>Умножить матрицы</Button>
                 <Button bsSize="small" onClick={this.props.onClear} block><Glyphicon glyph="remove" /> Очистить матрицы</Button>
@@ -36,5 +43,6 @@ MatrixMenu.propTypes = {
     onMultiply: React.PropTypes.func,
     onClear: React.PropTypes.func,
     onSwap: React.PropTypes.func,
-    onChangeSize: React.PropTypes.func
+    onChangeSize: React.PropTypes.func,
+    cellEditing: React.PropTypes.bool
 };

@@ -14,7 +14,8 @@ export default class MatrixCalculator extends Component {
             aMatrix: aMatrix,
             bMatrix: bMatrix,
             cMatrix: aMatrix.multiply(bMatrix),
-            selectedMatrix: null
+            selectedMatrix: null,
+            cellEditing: false
         };
     }
 
@@ -77,20 +78,25 @@ export default class MatrixCalculator extends Component {
         });
     }
 
+    onFocusChange(isFocused) {
+        this.setState({ cellEditing: isFocused });
+    }
+
     render() {
         return (
             <Grid fluid={true}>
                 <Row className="show-grid full-height-row">
                     <MatrixMenu a={this.state.aMatrix} b={this.state.bMatrix} c={this.state.cMatrix}
+                                cellEditing={this.state.cellEditing}
                                 selectedMatrix={this.state[this.state.selectedMatrix]}
                                 onMultiply={this.multiply.bind(this)}
                                 onClear={this.clear.bind(this)}
                                 onSwap={this.swap.bind(this)}
                                 onSelect={this.selectMatrix.bind(this)}
                                 onChangeSize={this.changeSizeMatrix.bind(this)}/>
-                    <MatrixMultiplicationField a={this.state.aMatrix}
-                                               b={this.state.bMatrix}
-                                               c={this.state.cMatrix} onChange={this.onChangeMatrix.bind(this)} />
+                    <MatrixMultiplicationField a={this.state.aMatrix} b={this.state.bMatrix} c={this.state.cMatrix}
+                                               onChange={this.onChangeMatrix.bind(this)}
+                                               onFocusChange={this.onFocusChange.bind(this)} />
                 </Row>
             </Grid>
         );

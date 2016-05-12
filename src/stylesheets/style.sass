@@ -11,18 +11,30 @@ html, body, #root, .container-fluid, .full-height-row, .matrix-menu
   margin: 30px 0 10px 0
 
 .matrix-menu
-  background-color: #e4e4e4
+  background-color: #ededed
 
 .matrix-view-table
+  display: inline-block
   border-collapse: separate
   border-spacing: 5px
 
-.matrix-view
-  background-color: #f6f6f6
-
 .matrix-cell
-  width: 30px
-  height: 30px
+  width: 35px
+  height: 35px
+  font-size: 16px
+
+::-webkit-input-placeholder
+  font-size: 12px
+::-moz-placeholder
+  font-size: 12px
+::-moz-placeholder
+  font-size: 12px
+::-ms-input-placeholder
+  font-size: 12px
+
+.matrix-view-table
+  border-right: 2px solid gray
+  border-left: 2px solid gray
 
 .matrix-multiplication-field, .result-matrix
   margin-top: 10px
@@ -44,3 +56,11 @@ html, body, #root, .container-fluid, .full-height-row, .matrix-menu
 
 .multiply-error
   background-color: #ffd3d9
+
+.matrix-name-label
+  display: inline-block
+  position: absolute
+  top: 30%
+  font-size: 50px
+  margin-left: 20px
+  color: #545454

@@ -14,15 +14,18 @@ export default class MatrixMultiplicationField extends Component {
                     <Col className="multiplied-matrix" xs={6} md={6}>
                         <MatrixView matrix={this.props.a} onFocusChange={(isFocused) =>  this.props.onFocusChange(isFocused)}
                                     onChange={(value, i, j) => this.props.onChange("aMatrix", value, i, j)}/>
+                        <div className="matrix-name-label">A</div>
                     </Col>
                     <Col className="multiplied-matrix" xs={6} md={6}>
                         <MatrixView matrix={this.props.b} onFocusChange={(isFocused) =>  this.props.onFocusChange(isFocused)}
                                     onChange={(value, i, j) => this.props.onChange("bMatrix", value, i, j)}/>
+                        <div className="matrix-name-label">B</div>
                     </Col>
                 </Row>
                 <Row className="show-grid">
                     <Col className="result-matrix" xs={6} md={6}>
                         {this.props.c ? <MatrixView matrix={this.props.c} readOnly={true}/> : null}
+                        {this.props.c ? <div className="matrix-name-label">C</div> : null}
                     </Col>
                 </Row>
             </Col>

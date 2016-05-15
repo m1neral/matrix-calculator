@@ -8,8 +8,8 @@ import { initialMatrixSize as INIT_SIZE } from '../settings/MatrixSettings';
 export default class MatrixCalculator extends Component {
     constructor(props) {
         super(props);
-        const [aMatrix, bMatrix] = [new Matrix(INIT_SIZE.aRowsCount, INIT_SIZE.aColsCount),
-            new Matrix(INIT_SIZE.bRowsCount, INIT_SIZE.bColsCount)];
+        const [aMatrix, bMatrix] = [new Matrix({ rowsCount: INIT_SIZE.aRowsCount, colsCount: INIT_SIZE.aColsCount }),
+            new Matrix({ rowsCount: INIT_SIZE.bRowsCount, colsCount: INIT_SIZE.bColsCount })];
         this.state = {
             aMatrix: aMatrix,
             bMatrix: bMatrix,
@@ -35,12 +35,9 @@ export default class MatrixCalculator extends Component {
     clear() {
         const [aRowsCount, aColsCount] = this.state.aMatrix.getSize();
         const [bRowsCount, bColsCount] = this.state.bMatrix.getSize();
-        const [aMatrix, bMatrix] = [new Matrix(aRowsCount, aColsCount), new Matrix(bRowsCount, bColsCount)];
-        this.setState({
-            aMatrix: new Matrix(aRowsCount, aColsCount),
-            bMatrix: new Matrix(bRowsCount, bColsCount),
-            cMatrix: aMatrix.multiply(bMatrix)
-        });
+        const [aMatrix, bMatrix] = [new Matrix({ rowsCount: aRowsCount, colsCount: aColsCount }),
+            new Matrix({ rowsCount: bRowsCount, colsCount: bColsCount })];
+        this.setState({ aMatrix: aMatrix, bMatrix: bMatrix, cMatrix: aMatrix.multiply(bMatrix) });
     }
 
     swap() {
@@ -48,7 +45,7 @@ export default class MatrixCalculator extends Component {
             aMatrix: this.state.bMatrix,
             bMatrix: this.state.aMatrix,
             cMatrix: this.state.bMatrix.canMultiply(this.state.aMatrix) ?
-                new Matrix(this.state.bMatrix.getRowsCount(), this.state.aMatrix.getColsCount()) : null
+                new Matrix({ rowsCount: this.state.bMatrix.getRowsCount(), colsCount: this.state.aMatrix.getColsCount() }) : null
         });
     }
 
@@ -74,7 +71,7 @@ export default class MatrixCalculator extends Component {
         this.setState({
             [this.state.selectedMatrix]: this.state[this.state.selectedMatrix],
             cMatrix: this.state.aMatrix.canMultiply(this.state.bMatrix) ?
-                new Matrix(this.state.aMatrix.getRowsCount(), this.state.bMatrix.getColsCount()) : null
+                new Matrix({ rowsCount: this.state.aMatrix.getRowsCount(), colsCount: this.state.bMatrix.getColsCount() }) : null
         });
     }
 

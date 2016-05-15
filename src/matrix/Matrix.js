@@ -1,10 +1,18 @@
+import { limitMatrixSize as LIMIT_SIZE } from '../settings/MatrixSettings';
+
 export default class Matrix {
-    constructor(rowsCount, colsCount) {
+    constructor({ rowsCount = LIMIT_SIZE.min, colsCount = LIMIT_SIZE.min } = {}, data) {
         this.store = [];
+
+        if (data) {
+            data = JSON.parse(data);
+            [rowsCount, colsCount] = [data.length, data[0].length];
+        }
+
         for (let i = 0; i < rowsCount; i++) {
             this.store[i] = [];
             for (let j = 0; j < colsCount; j++) {
-                this.store[i][j] = undefined;
+                this.store[i][j] = data ? data[i][j] == null ? undefined : data[i][j] : undefined;
             }
         }
     }
@@ -22,15 +30,15 @@ export default class Matrix {
     }
 
     getCellValue(i, j) {
-        return this.store[i][j];
+        return this.store[i][j] == null ? undefined : this.store[i][j];
     }
 
     setCellValue(value, i, j) {
         this.store[i][j] = value;
     }
 
-    getPureMatrix() {
-        return this.store;
+    getPureMatrix(serialized = false) {
+        return serialized ? JSON.stringify(this.store) : this.store;
     }
 
     addRow() {
@@ -59,7 +67,7 @@ export default class Matrix {
     }
 
     clear() {
-        return new Matrix(this.getRowsCount(), this.getColsCount());
+        return new Matrix({ rowsCount: this.getRowsCount(), colsCount: this.getColsCount() });
     }
 
     canMultiply(b) {
@@ -72,7 +80,7 @@ export default class Matrix {
 
         if (aColsCount !== bRowsCount) return;
 
-        let c = new Matrix(aRowsCount, bColsCount);
+        let c = new Matrix({ rowsCount: aRowsCount, colsCount: bColsCount });
 
         for (let k = 0; k < bColsCount; k++) {
             for (let i = 0; i < aRowsCount; i++) {

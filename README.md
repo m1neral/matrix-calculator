@@ -26,7 +26,7 @@ This is a simple matrix calculator built on react / react-bootstrap.
     http://localhost:8080/
     ```
 
-### DEMO (exist until 22.05.2016)
+### DEMO
 
-http://nomentor.me/
+http://m1neral.github.io/matrix-calculato
 

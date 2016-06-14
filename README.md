@@ -28,5 +28,5 @@ This is a simple matrix calculator built on react / react-bootstrap.
 
 ### DEMO
 
-http://m1neral.github.io/matrix-calculato
+http://m1neral.github.io/matrix-calculator
 
